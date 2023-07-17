@@ -1,0 +1,7 @@
+#!/bin/sh
+set -eu
+mkdir -p $ENEXA_WRITEABLE_DIRECTORY
+
+./main.py --embedding_dim 2 #"$(enexa-parameter http://example.org/embedding_dim)"
+enexa-add-file Experiments/*/model.pt
+enexa-add-file Experiments/*/configuration.json
