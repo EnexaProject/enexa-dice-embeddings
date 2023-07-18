@@ -1,7 +1,12 @@
 #!/bin/sh
 set -eu
-mkdir -p $ENEXA_WRITEABLE_DIRECTORY
 
-./main.py --embedding_dim 2 #"$(enexa-parameter http://example.org/embedding_dim)"
+# things which ENEXA is supposed to do
+mkdir -p $ENEXA_WRITEABLE_DIRECTORY
+echo "INSERT DATA { <$ENEXA_MODULE_INSTANCE_IRI> <http://example.org/dicee/embedding_dim> 2 }" \
+    |sparql-update "$ENEXA_META_DATA_ENDPOINT"
+
+# call dice-embeddings
+./main.py --embedding_dim "$(enexa-parameter "http://example.org/dicee/embedding_dim")"
 enexa-add-file Experiments/*/model.pt
 enexa-add-file Experiments/*/configuration.json
