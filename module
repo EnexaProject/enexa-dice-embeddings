@@ -14,5 +14,5 @@ echo "INSERT DATA { <$ENEXA_MODULE_INSTANCE_IRI> <http://example.org/dicee/embed
     --embedding_dim="$(enexa-parameter "http://example.org/dicee/embedding_dim")"
 
 # https://github.com/dice-group/dice-embeddings/issues/115
-enexa-add-file Experiments/*/model.pt
+enexa-add-file Experiments/*/model.pt "http://example.org/dicee/model.pt"
 enexa-add-file Experiments/*/configuration.json
