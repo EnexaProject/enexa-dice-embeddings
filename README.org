@@ -1,0 +1,19 @@
+* DICE Embeddings module for ENEXA
+** Build
+Build the [[../enexa-utils][enexa-utils]] first.
+#+begin_src shell :results output silent
+make build
+#+end_src
+
+** Test
+Start the services specified in ~docker-compose.yml~ in [[../enexa-utils][enexa-utils]] first.
+#+begin_src shell :results output silent
+make test
+#+end_src
+
+** Developer information
+- ~Dockerfile~ :: A Dockerfile for the Docker image of this module.
+- ~module~ :: A main module script to translate the input and output parameters between ENEXA and the application.
+
+** Links
+- [[https://github.com/dice-group/dice-embeddings][DICE Embeddings]]
