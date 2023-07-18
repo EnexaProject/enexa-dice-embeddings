@@ -3,16 +3,16 @@ set -eu
 
 # things which ENEXA is supposed to do
 mkdir -p $ENEXA_WRITEABLE_DIRECTORY
-echo "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> INSERT DATA { <$ENEXA_MODULE_INSTANCE_IRI> <http://example.org/dicee/model> <http://example.org/dicee/model/TransE> . <http://example.org/dicee/model/TransE> rdf:value 'TransE' }" \
+echo "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> INSERT DATA { <$ENEXA_MODULE_INSTANCE_IRI> <http://example.org/dicee/parameters/model> <http://example.org/dicee/models/TransE> . <http://example.org/dicee/models/TransE> rdf:value 'TransE' }" \
     |sparql-update "$ENEXA_META_DATA_ENDPOINT"
-echo "INSERT DATA { <$ENEXA_MODULE_INSTANCE_IRI> <http://example.org/dicee/embedding_dim> 2 }" \
+echo "INSERT DATA { <$ENEXA_MODULE_INSTANCE_IRI> <http://example.org/dicee/parameters/embedding_dim> 2 }" \
     |sparql-update "$ENEXA_META_DATA_ENDPOINT"
 
 # call dice-embeddings
 ./main.py \
-    --model="$(enexa-parameter "http://example.org/dicee/model")" \
-    --embedding_dim="$(enexa-parameter "http://example.org/dicee/embedding_dim")"
+    --model="$(enexa-parameter "http://example.org/dicee/parameters/model")" \
+    --embedding_dim="$(enexa-parameter "http://example.org/dicee/parameters/embedding_dim")"
 
 # https://github.com/dice-group/dice-embeddings/issues/115
-enexa-add-file Experiments/*/model.pt "http://example.org/dicee/model.pt"
+enexa-add-file Experiments/*/model.pt "http://example.org/dicee/parameters/model.pt"
 enexa-add-file Experiments/*/configuration.json
