@@ -15,7 +15,7 @@ echo "INSERT DATA { <$ENEXA_MODULE_INSTANCE_IRI> <http://example.org/dicee/param
     --path_dataset_folder="$(enexa-parameter "http://example.org/dicee/parameters/path_dataset_folder")" \
     --model="$(enexa-parameter "http://example.org/dicee/parameters/model")" \
     --embedding_dim="$(enexa-parameter "http://example.org/dicee/parameters/embedding_dim")"
-    --save_embeddings_as_csv True
+    --save_embeddings_as_csv True \
 
 # https://github.com/dice-group/dice-embeddings/issues/115
 enexa-add-file Experiments/*/model.pt "http://example.org/dicee/parameters/model.pt"
