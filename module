@@ -7,20 +7,20 @@ set -eu
     --model="$(enexa-parameter "http://example.org/dicee/parameters/model")" \
     --num_epochs="$(enexa-parameter "http://example.org/dicee/parameters/num_epochs")" \
     --embedding_dim="$(enexa-parameter "http://example.org/dicee/parameters/embedding_dim")" \
-    --absolute_path_to_store=Experiment
+    --absolute_path_to_store="$ENEXA_MODULE_INSTANCE_DIRECTORY"
 
-enexa-add-file Experiment/configuration.json
-enexa-add-file Experiment/constraints.p
-enexa-add-file Experiment/ee_vocab.p
-enexa-add-file Experiment/entity_to_idx.p
-enexa-add-file Experiment/epoch_losses.csv
-enexa-add-file Experiment/er_vocab.p
-enexa-add-file Experiment/eval_report.json
-enexa-add-file Experiment/model.pt "http://example.org/dicee/parameters/model.pt"
-enexa-add-file Experiment/re_vocab.p
-enexa-add-file Experiment/relation_to_idx.p
-enexa-add-file Experiment/report.json
-enexa-add-file Experiment/test_set.npy
-enexa-add-file Experiment/train_set.npy
-enexa-add-file Experiment/valid_set.npy
-enexa-add-file Experiment/*_entity_embeddings.csv "http://example.org/dicee/parameters/entity_embeddings.csv"
+enexa-add-file "$ENEXA_MODULE_INSTANCE_DIRECTORY"/configuration.json
+enexa-add-file "$ENEXA_MODULE_INSTANCE_DIRECTORY"/constraints.p
+enexa-add-file "$ENEXA_MODULE_INSTANCE_DIRECTORY"/ee_vocab.p
+enexa-add-file "$ENEXA_MODULE_INSTANCE_DIRECTORY"/entity_to_idx.p
+enexa-add-file "$ENEXA_MODULE_INSTANCE_DIRECTORY"/epoch_losses.csv
+enexa-add-file "$ENEXA_MODULE_INSTANCE_DIRECTORY"/er_vocab.p
+enexa-add-file "$ENEXA_MODULE_INSTANCE_DIRECTORY"/eval_report.json
+enexa-add-file "$ENEXA_MODULE_INSTANCE_DIRECTORY"/model.pt "http://example.org/dicee/parameters/model.pt"
+enexa-add-file "$ENEXA_MODULE_INSTANCE_DIRECTORY"/re_vocab.p
+enexa-add-file "$ENEXA_MODULE_INSTANCE_DIRECTORY"/relation_to_idx.p
+enexa-add-file "$ENEXA_MODULE_INSTANCE_DIRECTORY"/report.json
+enexa-add-file "$ENEXA_MODULE_INSTANCE_DIRECTORY"/test_set.npy
+enexa-add-file "$ENEXA_MODULE_INSTANCE_DIRECTORY"/train_set.npy
+enexa-add-file "$ENEXA_MODULE_INSTANCE_DIRECTORY"/valid_set.npy
+enexa-add-file "$ENEXA_MODULE_INSTANCE_DIRECTORY"/*_entity_embeddings.csv "http://example.org/dicee/parameters/entity_embeddings.csv"
