@@ -1,12 +1,12 @@
 * DICE Embeddings module for ENEXA
 ** Build
-Build the [[../enexa-utils][enexa-utils]] first.
+Build the [[https://github.com/EnexaProject/enexa-utils][enexa-utils]] Docker image first, then:
 #+begin_src shell :results output silent
 make build
 #+end_src
 
 ** Test
-Start the services specified in ~docker-compose.yml~ in [[../enexa-utils][enexa-utils]] first.
+Setup the test environment from [[https://github.com/EnexaProject/enexa-utils][enexa-utils]] first, then:
 #+begin_src shell :results output silent
 make test
 #+end_src

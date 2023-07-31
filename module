@@ -1,21 +1,26 @@
 #!/bin/sh
 set -eu
 
-# things which ENEXA is supposed to do
-mkdir -p $ENEXA_WRITEABLE_DIRECTORY
-echo "PREFIX enexa: <http://w3id.org/dice-research/enexa/ontology#> INSERT DATA { <$ENEXA_MODULE_INSTANCE_IRI> <http://example.org/dicee/parameters/path_dataset_folder> <http://example.org/diceeKGs/UMLS> . <http://example.org/diceeKGs/UMLS> enexa:location 'enexa-dir://KGs/UMLS' }" \
-    |sparql-update "$ENEXA_META_DATA_ENDPOINT"
-echo "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> INSERT DATA { <$ENEXA_MODULE_INSTANCE_IRI> <http://example.org/dicee/parameters/model> <http://example.org/dicee/models/TransE> . <http://example.org/dicee/models/TransE> rdf:value 'TransE' }" \
-    |sparql-update "$ENEXA_META_DATA_ENDPOINT"
-echo "INSERT DATA { <$ENEXA_MODULE_INSTANCE_IRI> <http://example.org/dicee/parameters/embedding_dim> 2 }" \
-    |sparql-update "$ENEXA_META_DATA_ENDPOINT"
-
-# call dice-embeddings
 ./main.py \
+    --save_embeddings_as_csv True \
     --path_dataset_folder="$(enexa-parameter "http://example.org/dicee/parameters/path_dataset_folder")" \
     --model="$(enexa-parameter "http://example.org/dicee/parameters/model")" \
-    --embedding_dim="$(enexa-parameter "http://example.org/dicee/parameters/embedding_dim")"
+    --num_epochs="$(enexa-parameter "http://example.org/dicee/parameters/num_epochs")" \
+    --embedding_dim="$(enexa-parameter "http://example.org/dicee/parameters/embedding_dim")" \
+    --absolute_path_to_store="$ENEXA_MODULE_INSTANCE_DIRECTORY"
 
-# https://github.com/dice-group/dice-embeddings/issues/115
-enexa-add-file Experiments/*/model.pt "http://example.org/dicee/parameters/model.pt"
-enexa-add-file Experiments/*/configuration.json
+enexa-add-file "$ENEXA_MODULE_INSTANCE_DIRECTORY"/configuration.json
+enexa-add-file "$ENEXA_MODULE_INSTANCE_DIRECTORY"/constraints.p
+enexa-add-file "$ENEXA_MODULE_INSTANCE_DIRECTORY"/ee_vocab.p
+enexa-add-file "$ENEXA_MODULE_INSTANCE_DIRECTORY"/entity_to_idx.p
+enexa-add-file "$ENEXA_MODULE_INSTANCE_DIRECTORY"/epoch_losses.csv
+enexa-add-file "$ENEXA_MODULE_INSTANCE_DIRECTORY"/er_vocab.p
+enexa-add-file "$ENEXA_MODULE_INSTANCE_DIRECTORY"/eval_report.json
+enexa-add-file "$ENEXA_MODULE_INSTANCE_DIRECTORY"/model.pt "http://example.org/dicee/parameters/model.pt"
+enexa-add-file "$ENEXA_MODULE_INSTANCE_DIRECTORY"/re_vocab.p
+enexa-add-file "$ENEXA_MODULE_INSTANCE_DIRECTORY"/relation_to_idx.p
+enexa-add-file "$ENEXA_MODULE_INSTANCE_DIRECTORY"/report.json
+enexa-add-file "$ENEXA_MODULE_INSTANCE_DIRECTORY"/test_set.npy
+enexa-add-file "$ENEXA_MODULE_INSTANCE_DIRECTORY"/train_set.npy
+enexa-add-file "$ENEXA_MODULE_INSTANCE_DIRECTORY"/valid_set.npy
+enexa-add-file "$ENEXA_MODULE_INSTANCE_DIRECTORY"/*_entity_embeddings.csv "http://example.org/dicee/parameters/entity_embeddings.csv"
