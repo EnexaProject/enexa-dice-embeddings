@@ -45,6 +45,7 @@
 	rdfs:comment "The class of Knowledge graph embedding algorithms."@en .
 
 <http://dice-research.org/DICE-framework/algorithms/ConEx> a <http://dice-research.org/DICE-framework/algorithms/Algorithm> ;
+	rdf:value "ConEx" ;
 	rdfs:label "ConEx"@en ;
 	rdfs:comment "The knowledge graph embedding algorithm ConEx proposed by Demir et al."@en .
 
