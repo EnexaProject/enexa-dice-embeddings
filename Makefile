@@ -8,12 +8,16 @@ ENEXA_WRITEABLE_DIRECTORY=$(ENEXA_SHARED_DIRECTORY)/writeable
 ENEXA_META_DATA_ENDPOINT=http://admin:admin@fuseki:3030/test
 ENEXA_MODULE_INSTANCE_IRI=http://example.org/$(ID)
 
+GRAPH_STORE_POST=docker run --rm -i --attach STDIN --attach STDOUT --attach STDERR --network $(DOCKER_NETWORK) $(TAG) graph-store-post "$(ENEXA_META_DATA_ENDPOINT)"
+
 build:
 	docker build -t $(TAG) .
 
 test: $(SHARED_DIR)/KGs
 	# things which ENEXA is supposed to do
-	echo "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> PREFIX enexa: <http://w3id.org/dice-research/enexa/ontology#> INSERT DATA { <$(ENEXA_MODULE_INSTANCE_IRI)> <http://example.org/dicee/parameters/path_dataset_folder> <http://example.org/diceeKGs/UMLS> ; <http://example.org/dicee/parameters/model> <http://example.org/dicee/models/TransE> ; <http://example.org/dicee/parameters/num_epochs> 10 ; <http://example.org/dicee/parameters/embedding_dim> 2 . <http://example.org/diceeKGs/UMLS> enexa:location 'enexa-dir://KGs/UMLS' . <http://example.org/dicee/models/TransE> rdf:value 'TransE' }" |docker run -i --attach STDIN --rm --network $(DOCKER_NETWORK) $(TAG) sparql-update "$(ENEXA_META_DATA_ENDPOINT)"
+	<module.ttl $(GRAPH_STORE_POST)
+	<test.ttl perl -pe "BEGIN {undef $$/} s{\\[}{<$(ENEXA_MODULE_INSTANCE_IRI)>}; s{\\]}{}" |$(GRAPH_STORE_POST)
+	echo "@prefix enexa: <http://w3id.org/dice-research/enexa/ontology#> . <http://example.org/enexa-files/UMLS> enexa:location 'enexa-dir://KGs/UMLS'" |$(GRAPH_STORE_POST)
 
 	docker run --rm \
 	-v $(SHARED_DIR):$(ENEXA_SHARED_DIRECTORY) \

@@ -1,0 +1,6 @@
+[
+    <http://example.org/dicee/parameters/path_dataset_folder> <http://example.org/enexa-files/UMLS> ;
+    <http://example.org/dicee/parameters/model> <http://dice-research.org/DICE-framework/algorithms/ConEx> ;
+    <http://example.org/dicee/parameters/num_epochs> 5 ;
+    <http://example.org/dicee/parameters/embedding_dim> 2 .
+]
