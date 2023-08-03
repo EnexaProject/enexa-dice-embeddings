@@ -12,7 +12,7 @@
 <http://dice-research.org/DICE-framework/v1.0> a enexa:Module ;
 	rdfs:label "DICE Knowledge Graph Embedding Framework"@en ;
 	rdfs:comment "This framework provides the functionality to generate knowledge graph embedding models based on a variaty of embedding algorithms."@en ; 
-	hobbit:image <urn:container:docker:image:docker.io/dicegroup/dice-embeddings:0.1.3> ; 
+	hobbit:image <urn:container:docker:image:docker.io/dicegroup/enexa-dice-embeddings:0.1.3> ; 
 	alg:parameter <http://example.org/dicee/parameters/model> ; 
 	alg:parameter <http://example.org/dicee/parameters/path_dataset_folder> ; 
 	alg:parameter <http://example.org/dicee/parameters/num_epochs> ; 

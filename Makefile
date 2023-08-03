@@ -1,4 +1,4 @@
-TAG=enexa-dice-embeddings:latest
+TAG=docker.io/dicegroup/enexa-dice-embeddings:0.1.3
 
 DOCKER_NETWORK=enexa-utils_default
 SHARED_DIR=$(PWD)/test-shared-dir
