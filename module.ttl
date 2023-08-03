@@ -8,51 +8,54 @@
 @prefix rdfs:   <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix sd:     <http://www.w3.org/ns/sparql-service-description#> .
 @prefix xsd:    <http://www.w3.org/2000/10/XMLSchema#> .
+@base           <http://w3id.org/dice-research/enexa/module/dice-embeddings/> .
 
-<http://dice-research.org/DICE-framework/v1.0> a enexa:Module ;
+<v0.1> a enexa:Module ;
 	rdfs:label "DICE Knowledge Graph Embedding Framework"@en ;
 	rdfs:comment "This framework provides the functionality to generate knowledge graph embedding models based on a variaty of embedding algorithms."@en ; 
 	hobbit:image <urn:container:docker:image:docker.io/dicegroup/dice-embeddings:0.1.3> ; 
-	alg:parameter <http://example.org/dicee/parameters/model> ; 
-	alg:parameter <http://example.org/dicee/parameters/path_dataset_folder> ; 
-	alg:parameter <http://example.org/dicee/parameters/num_epochs> ; 
-	alg:parameter <http://example.org/dicee/parameters/embedding_dim> ; 
-	alg:produces <http://example.org/dicee/parameters/model.pt> ;
-	alg:produces <http://example.org/dicee/parameters/entity_embeddings.csv> .
+	alg:parameter
+		<parameter/model> ,
+		<parameter/path_dataset_folder> ,
+		<parameter/num_epochs> ,
+		<parameter/embedding_dim> ;
+	alg:produces
+		<parameter/model.pt> ,
+		<parameter/entity_embeddings.csv> .
 
-<http://example.org/dicee/parameters/model> a alg:Parameter ;
+<parameter/model> a alg:Parameter ;
 	rdfs:label "Embedding algorithm"@en ; 
 	rdfs:comment "The knowledge graph embedding algorithm that is used to generate the embedding model."@en ; 
-	rdfs:range <http://dice-research.org/DICE-framework/algorithms/KGEAlgorithm> .
+	rdfs:range <algorithm/KGEAlgorithm> .
 
-<http://example.org/dicee/parameters/embedding_dim> a alg:Parameter ; 
+<parameter/embedding_dim> a alg:Parameter ;
 	rdfs:label "Number of dimensions"@en ; 
 	rdfs:comment "The number of dimensions the generated embedding model should have."@en ; 
 	rdfs:range xsd:nonNegativeInteger .
 	
-<http://dice-research.org/DICE-framework/parameters/dimensions> a alg:Parameter ; 
+<parameter/dimensions> a alg:Parameter ;
 	rdfs:label "Number of epochs"@en ; 
 	rdfs:comment "The number of epochs used during the generation of embeddings."@en ; 
 	rdfs:range xsd:nonNegativeInteger .
 
-<http://example.org/dicee/parameters/path_dataset_folder> a alg:Parameter ; 
+<parameter/path_dataset_folder> a alg:Parameter ;
 	rdfs:label "Knowledge graph"@en ; 
 	rdfs:comment "The knowledge graph that should be embedded."@en ; 
 	rdfs:range rdf:Resource .
 
-<http://dice-research.org/DICE-framework/algorithms/KGEAlgorithm> a rdfs:Class ; 
+<algorithm/KGEAlgorithm> a rdfs:Class ;
 	rdfs:label "Knowledge graph embedding algorithm"@en ; 
 	rdfs:comment "The class of Knowledge graph embedding algorithms."@en .
 
-<http://dice-research.org/DICE-framework/algorithms/ConEx> a <http://dice-research.org/DICE-framework/algorithms/Algorithm> ;
+<algorithm/ConEx> a <algorithm/KGEAlgorithm> ;
 	rdf:value "ConEx" ;
 	rdfs:label "ConEx"@en ;
 	rdfs:comment "The knowledge graph embedding algorithm ConEx proposed by Demir et al."@en .
 
-<http://example.org/dicee/parameters/model.pt> a alg:Result ;
+<parameter/model.pt> a alg:Result ;
 	rdfs:label "Knowledge graph embedding model"@en ;
 	rdfs:comment "The Knowledge graph embedding model created by the algorithm."@en .
 
-<http://example.org/dicee/parameters/entity_embeddings.csv> a alg:Result ;
+<parameter/entity_embeddings.csv> a alg:Result ;
 	rdfs:label "Entity embeddings"@en ;
 	rdfs:comment "The entity embeddings of the given knowledge graph as CSV file."@en .
