@@ -3,10 +3,19 @@ set -eu
 
 echo Hi!
 echo $ENEXA_META_DATA_ENDPOINT
-echo 'select ?s ?p ?o {?s ?p ?o.}' |sparql-select "$ENEXA_META_DATA_ENDPOINT"
+echo "test 20230808"
+#echo 'select ?s ?p ?o {?s ?p ?o.}' |sparql-select "$ENEXA_META_DATA_ENDPOINT"
 
+echo ./main.py \
+    --save_embeddings_as_csv \
+    --path_dataset_folder="$(enexa-parameter "http://dice-research.org/DICE-framework/parameters/path_dataset_folder")" \
+    --model="$(enexa-parameter "http://dice-research.org/DICE-framework/parameters/model")" \
+    --num_epochs="$(enexa-parameter "http://dice-research.org/DICE-framework/parameters/num_epochs")" \
+    --embedding_dim="$(enexa-parameter "http://dice-research.org/DICE-framework/parameters/embedding_dim")" \
+    --absolute_path_to_store="$ENEXA_MODULE_INSTANCE_DIRECTORY"
+    
 ./main.py \
-    --save_embeddings_as_csv True \
+    --save_embeddings_as_csv \
     --path_dataset_folder="$(enexa-parameter "http://dice-research.org/DICE-framework/parameters/path_dataset_folder")" \
     --model="$(enexa-parameter "http://dice-research.org/DICE-framework/parameters/model")" \
     --num_epochs="$(enexa-parameter "http://dice-research.org/DICE-framework/parameters/num_epochs")" \
