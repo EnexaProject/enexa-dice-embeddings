@@ -6,34 +6,27 @@ echo $ENEXA_META_DATA_ENDPOINT
 echo "test 20230808"
 #echo 'select ?s ?p ?o {?s ?p ?o.}' |sparql-select "$ENEXA_META_DATA_ENDPOINT"
 
-echo ./main.py \
-    --save_embeddings_as_csv \
-    --path_dataset_folder="$(enexa-parameter "http://dice-research.org/DICE-framework/parameters/path_dataset_folder")" \
-    --model="$(enexa-parameter "http://dice-research.org/DICE-framework/parameters/model")" \
-    --num_epochs="$(enexa-parameter "http://dice-research.org/DICE-framework/parameters/num_epochs")" \
-    --embedding_dim="$(enexa-parameter "http://dice-research.org/DICE-framework/parameters/embedding_dim")" \
-    --absolute_path_to_store="$ENEXA_MODULE_INSTANCE_DIRECTORY"
     
+PREFIX=http://w3id.org/dice-research/enexa/module/dice-embeddings/
+
+echo ./main.py \
+    --save_embeddings_as_csv True \
+    --path_dataset_folder="$(enexa-parameter "${PREFIX}parameter/path_dataset_folder")" \
+    --model="$(enexa-parameter "${PREFIX}parameter/model")" \
+    --num_epochs="$(enexa-parameter "${PREFIX}parameter/num_epochs")" \
+    --embedding_dim="$(enexa-parameter "${PREFIX}parameter/embedding_dim")" \
+
 ./main.py \
-    --save_embeddings_as_csv \
-    --path_dataset_folder="$(enexa-parameter "http://dice-research.org/DICE-framework/parameters/path_dataset_folder")" \
-    --model="$(enexa-parameter "http://dice-research.org/DICE-framework/parameters/model")" \
-    --num_epochs="$(enexa-parameter "http://dice-research.org/DICE-framework/parameters/num_epochs")" \
-    --embedding_dim="$(enexa-parameter "http://dice-research.org/DICE-framework/parameters/embedding_dim")" \
+    --save_embeddings_as_csv True \
+    --path_dataset_folder="$(enexa-parameter "${PREFIX}parameter/path_dataset_folder")" \
+    --model="$(enexa-parameter "${PREFIX}parameter/model")" \
+    --num_epochs="$(enexa-parameter "${PREFIX}parameter/num_epochs")" \
+    --embedding_dim="$(enexa-parameter "${PREFIX}parameter/embedding_dim")" \
     --absolute_path_to_store="$ENEXA_MODULE_INSTANCE_DIRECTORY"
 
 enexa-add-file "$ENEXA_MODULE_INSTANCE_DIRECTORY"/configuration.json
-enexa-add-file "$ENEXA_MODULE_INSTANCE_DIRECTORY"/constraints.p
-enexa-add-file "$ENEXA_MODULE_INSTANCE_DIRECTORY"/ee_vocab.p
-enexa-add-file "$ENEXA_MODULE_INSTANCE_DIRECTORY"/entity_to_idx.p
 enexa-add-file "$ENEXA_MODULE_INSTANCE_DIRECTORY"/epoch_losses.csv
-enexa-add-file "$ENEXA_MODULE_INSTANCE_DIRECTORY"/er_vocab.p
 enexa-add-file "$ENEXA_MODULE_INSTANCE_DIRECTORY"/eval_report.json
-enexa-add-file "$ENEXA_MODULE_INSTANCE_DIRECTORY"/model.pt "http://dice-research.org/DICE-framework/parameters/model.pt"
-enexa-add-file "$ENEXA_MODULE_INSTANCE_DIRECTORY"/re_vocab.p
-enexa-add-file "$ENEXA_MODULE_INSTANCE_DIRECTORY"/relation_to_idx.p
+enexa-add-file "$ENEXA_MODULE_INSTANCE_DIRECTORY"/model.pt "${PREFIX}parameter/model.pt"
 enexa-add-file "$ENEXA_MODULE_INSTANCE_DIRECTORY"/report.json
-enexa-add-file "$ENEXA_MODULE_INSTANCE_DIRECTORY"/test_set.npy
-enexa-add-file "$ENEXA_MODULE_INSTANCE_DIRECTORY"/train_set.npy
-enexa-add-file "$ENEXA_MODULE_INSTANCE_DIRECTORY"/valid_set.npy
-enexa-add-file "$ENEXA_MODULE_INSTANCE_DIRECTORY"/*_entity_embeddings.csv "http://dice-research.org/DICE-framework/parameters/entity_embeddings.csv"
+enexa-add-file "$ENEXA_MODULE_INSTANCE_DIRECTORY"/*_entity_embeddings.csv "${PREFIX}parameter/entity_embeddings.csv"

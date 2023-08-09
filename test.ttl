@@ -1,8 +1,9 @@
 @prefix xsd: <http://www.w3.org/2000/10/XMLSchema#> .
+@base <http://w3id.org/dice-research/enexa/module/dice-embeddings/> .
 
 [
-    <http://example.org/dicee/parameters/path_dataset_folder> <http://example.org/enexa-files/UMLS> ;
-    <http://example.org/dicee/parameters/model> <http://dice-research.org/DICE-framework/algorithms/ConEx> ;
-    <http://example.org/dicee/parameters/num_epochs> "5"^^xsd:nonNegativeInteger ;
-    <http://example.org/dicee/parameters/embedding_dim> 2 .
+    <parameter/path_dataset_folder> <http://example.org/enexa-files/UMLS> ;
+    <parameter/model> <algorithm/ConEx> ;
+    <parameter/num_epochs> "5"^^xsd:nonNegativeInteger ;
+    <parameter/embedding_dim> 2 .
 ]
