@@ -12,17 +12,8 @@ PREFIX=http://w3id.org/dice-research/enexa/module/dice-embeddings/
     --absolute_path_to_store="$ENEXA_MODULE_INSTANCE_DIRECTORY"
 
 enexa-add-file "$ENEXA_MODULE_INSTANCE_DIRECTORY"/configuration.json
-enexa-add-file "$ENEXA_MODULE_INSTANCE_DIRECTORY"/constraints.p
-enexa-add-file "$ENEXA_MODULE_INSTANCE_DIRECTORY"/ee_vocab.p
-enexa-add-file "$ENEXA_MODULE_INSTANCE_DIRECTORY"/entity_to_idx.p
 enexa-add-file "$ENEXA_MODULE_INSTANCE_DIRECTORY"/epoch_losses.csv
-enexa-add-file "$ENEXA_MODULE_INSTANCE_DIRECTORY"/er_vocab.p
 enexa-add-file "$ENEXA_MODULE_INSTANCE_DIRECTORY"/eval_report.json
 enexa-add-file "$ENEXA_MODULE_INSTANCE_DIRECTORY"/model.pt "${PREFIX}parameter/model.pt"
-enexa-add-file "$ENEXA_MODULE_INSTANCE_DIRECTORY"/re_vocab.p
-enexa-add-file "$ENEXA_MODULE_INSTANCE_DIRECTORY"/relation_to_idx.p
 enexa-add-file "$ENEXA_MODULE_INSTANCE_DIRECTORY"/report.json
-enexa-add-file "$ENEXA_MODULE_INSTANCE_DIRECTORY"/test_set.npy
-enexa-add-file "$ENEXA_MODULE_INSTANCE_DIRECTORY"/train_set.npy
-enexa-add-file "$ENEXA_MODULE_INSTANCE_DIRECTORY"/valid_set.npy
 enexa-add-file "$ENEXA_MODULE_INSTANCE_DIRECTORY"/*_entity_embeddings.csv "${PREFIX}parameter/entity_embeddings.csv"
