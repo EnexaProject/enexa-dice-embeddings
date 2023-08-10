@@ -1,4 +1,4 @@
 FROM dice-embeddings
-COPY --from=enexa-utils:1 / /.
+COPY --from=hub.cs.upb.de/enexa/images/enexa-utils:1 / /.
 ADD ./module .
 CMD ./module

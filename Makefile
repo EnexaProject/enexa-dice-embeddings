@@ -1,4 +1,5 @@
-TAG=enexa-dice-embeddings:latest
+IMAGE:=hub.cs.upb.de/enexa/images/enexa-dice-embeddings
+TAG:=$(IMAGE):1.0.0
 
 DOCKER_NETWORK=enexa-utils_default
 SHARED_DIR=$(PWD)/test-shared-dir
@@ -34,3 +35,6 @@ $(SHARED_DIR)/KGs:
 	mkdir -p $(SHARED_DIR)
 	wget -O $(SHARED_DIR)/KGs.zip https://hobbitdata.informatik.uni-leipzig.de/KG/KGs.zip
 	unzip $(SHARED_DIR)/KGs.zip -d $(SHARED_DIR)
+
+push:
+	docker push $(TAG)
