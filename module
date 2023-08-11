@@ -10,14 +10,14 @@ echo "test 20230808"
 PREFIX=http://w3id.org/dice-research/enexa/module/dice-embeddings/
 
 echo ./main.py \
-    --save_embeddings_as_csv True \
+    --save_embeddings_as_csv  \
     --path_dataset_folder="$(enexa-parameter "${PREFIX}parameter/path_dataset_folder")" \
     --model="$(enexa-parameter "${PREFIX}parameter/model")" \
     --num_epochs="$(enexa-parameter "${PREFIX}parameter/num_epochs")" \
     --embedding_dim="$(enexa-parameter "${PREFIX}parameter/embedding_dim")" \
 
 ./main.py \
-    --save_embeddings_as_csv True \
+    --save_embeddings_as_csv  \
     --path_dataset_folder="$(enexa-parameter "${PREFIX}parameter/path_dataset_folder")" \
     --model="$(enexa-parameter "${PREFIX}parameter/model")" \
     --num_epochs="$(enexa-parameter "${PREFIX}parameter/num_epochs")" \
