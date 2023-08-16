@@ -1,32 +1,31 @@
 #!/bin/sh
 set -eu
 
-echo Hi!
-echo $ENEXA_META_DATA_ENDPOINT
-echo "test 20230808"
-#echo 'select ?s ?p ?o {?s ?p ?o.}' |sparql-select "$ENEXA_META_DATA_ENDPOINT"
-
-    
 PREFIX=http://w3id.org/dice-research/enexa/module/dice-embeddings/
 
 echo ./main.py \
-    --save_embeddings_as_csv  \
-    --path_dataset_folder="$(enexa-parameter "${PREFIX}parameter/path_dataset_folder")" \
+    --batch_size=32 \
+    --embedding_dim="$(enexa-parameter "${PREFIX}parameter/embedding_dim")" \
+    --eval_model None \
     --model="$(enexa-parameter "${PREFIX}parameter/model")" \
     --num_epochs="$(enexa-parameter "${PREFIX}parameter/num_epochs")" \
-    --embedding_dim="$(enexa-parameter "${PREFIX}parameter/embedding_dim")" \
+    --path_single_kg="$(enexa-parameter "${PREFIX}parameter/path_single_kg")" \
+    --save_embeddings_as_csv \
+    --storage_path="$ENEXA_MODULE_INSTANCE_DIRECTORY"
 
 ./main.py \
-    --save_embeddings_as_csv  \
-    --path_dataset_folder="$(enexa-parameter "${PREFIX}parameter/path_dataset_folder")" \
+    --batch_size="$(enexa-parameter "${PREFIX}parameter/batch_size")" \
+    --embedding_dim="$(enexa-parameter "${PREFIX}parameter/embedding_dim")" \
+    --eval_model None \
     --model="$(enexa-parameter "${PREFIX}parameter/model")" \
     --num_epochs="$(enexa-parameter "${PREFIX}parameter/num_epochs")" \
-    --embedding_dim="$(enexa-parameter "${PREFIX}parameter/embedding_dim")" \
-    --absolute_path_to_store="$ENEXA_MODULE_INSTANCE_DIRECTORY"
+    --path_single_kg="$(enexa-parameter "${PREFIX}parameter/path_single_kg")" \
+    --save_embeddings_as_csv \
+    --storage_path="$ENEXA_MODULE_INSTANCE_DIRECTORY"
 
 enexa-add-file "$ENEXA_MODULE_INSTANCE_DIRECTORY"/configuration.json
 enexa-add-file "$ENEXA_MODULE_INSTANCE_DIRECTORY"/epoch_losses.csv
 enexa-add-file "$ENEXA_MODULE_INSTANCE_DIRECTORY"/eval_report.json
-enexa-add-file "$ENEXA_MODULE_INSTANCE_DIRECTORY"/model.pt "${PREFIX}parameter/model.pt"
+enexa-add-file "$ENEXA_MODULE_INSTANCE_DIRECTORY"/model.pt "${PREFIX}result/model.pt"
 enexa-add-file "$ENEXA_MODULE_INSTANCE_DIRECTORY"/report.json
-enexa-add-file "$ENEXA_MODULE_INSTANCE_DIRECTORY"/*_entity_embeddings.csv "${PREFIX}parameter/entity_embeddings.csv"
+enexa-add-file "$ENEXA_MODULE_INSTANCE_DIRECTORY"/*_entity_embeddings.csv "${PREFIX}result/entity_embeddings.csv"

@@ -1,5 +1,6 @@
-IMAGE:=hub.cs.upb.de/enexa/images/enexa-dice-embeddings
-TAG:=$(IMAGE):1.0.0
+IMAGE=hub.cs.upb.de/enexa/images/enexa-dice-embeddings
+VERSION=1.0.0
+TAG=$(IMAGE):$(VERSION)
 
 
 DOCKER_NETWORK=enexa-utils_default
@@ -39,6 +40,13 @@ $(SHARED_DIR)/KGs:
 	wget -O $(SHARED_DIR)/KGs.zip https://hobbitdata.informatik.uni-leipzig.de/KG/KGs.zip
 	unzip $(SHARED_DIR)/KGs.zip -d $(SHARED_DIR)
 
-
 push:
 	docker push $(TAG)
+
+push-latest:
+	docker tag $(TAG) $(IMAGE):latest
+	docker push $(IMAGE):latest
+
+update-ttl-file:
+	echo "# Don't change this file! It is generated based on module.ttl.template." > module.ttl
+	sed 's/$$(VERSION)/$(VERSION)/g' module.ttl.template | sed 's=$$(TAG)=$(TAG)=g' >> module.ttl

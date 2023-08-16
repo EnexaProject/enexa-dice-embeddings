@@ -21,8 +21,8 @@
 		<parameter/num_epochs> ,
 		<parameter/path_single_kg> ;
 	alg:produces
-		<parameter/model.pt> ,
-		<parameter/entity_embeddings.csv> .
+		<result/model.pt> ,
+		<result/entity_embeddings.csv> .
 	
 <parameter/batch_size> a alg:Parameter ;
 	rdfs:label "Batch size"@en ; 
@@ -63,10 +63,10 @@
 	rdfs:label "DistMult"@en ;
 	rdfs:comment "The knowledge graph embedding algorithm DistMult."@en .
 
-<parameter/model.pt> a alg:Result ;
+<result/model.pt> a alg:Result ;
 	rdfs:label "Knowledge graph embedding model"@en ;
 	rdfs:comment "The Knowledge graph embedding model created by the algorithm."@en .
 
-<parameter/entity_embeddings.csv> a alg:Result ;
+<result/entity_embeddings.csv> a alg:Result ;
 	rdfs:label "Entity embeddings"@en ;
 	rdfs:comment "The entity embeddings of the given knowledge graph as CSV file."@en .
