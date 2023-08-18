@@ -2,9 +2,10 @@
 set -eu
 
 PREFIX=http://w3id.org/dice-research/enexa/module/dice-embeddings/
+OUTPUT=output
 
 echo ./main.py \
-    --batch_size=32 \
+    --batch_size="$(enexa-parameter "${PREFIX}parameter/batch_size")" \
     --embedding_dim="$(enexa-parameter "${PREFIX}parameter/embedding_dim")" \
     --eval_model None \
     --model="$(enexa-parameter "${PREFIX}parameter/model")" \
@@ -21,11 +22,11 @@ echo ./main.py \
     --num_epochs="$(enexa-parameter "${PREFIX}parameter/num_epochs")" \
     --path_single_kg="$(enexa-parameter "${PREFIX}parameter/path_single_kg")" \
     --save_embeddings_as_csv \
-    --storage_path="$ENEXA_MODULE_INSTANCE_DIRECTORY"
+    --storage_path="$OUTPUT"
 
-enexa-add-file "$ENEXA_MODULE_INSTANCE_DIRECTORY"/configuration.json
-enexa-add-file "$ENEXA_MODULE_INSTANCE_DIRECTORY"/epoch_losses.csv
-enexa-add-file "$ENEXA_MODULE_INSTANCE_DIRECTORY"/eval_report.json
-enexa-add-file "$ENEXA_MODULE_INSTANCE_DIRECTORY"/model.pt "${PREFIX}result/model.pt"
-enexa-add-file "$ENEXA_MODULE_INSTANCE_DIRECTORY"/report.json
-enexa-add-file "$ENEXA_MODULE_INSTANCE_DIRECTORY"/*_entity_embeddings.csv "${PREFIX}result/entity_embeddings.csv"
+enexa-add-file "$OUTPUT"/*/configuration.json
+enexa-add-file "$OUTPUT"/*/epoch_losses.csv
+#enexa-add-file "$OUTPUT"/*/eval_report.json
+enexa-add-file "$OUTPUT"/*/model.pt "${PREFIX}result/model.pt"
+enexa-add-file "$OUTPUT"/*/report.json
+enexa-add-file "$OUTPUT"/*/*_entity_embeddings.csv "${PREFIX}result/entity_embeddings.csv"
