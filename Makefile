@@ -13,7 +13,7 @@ ENEXA_MODULE_INSTANCE_IRI=http://dice-research.org/$(ID)
 
 GRAPH_STORE_POST=docker run --rm -i --attach STDIN --attach STDOUT --attach STDERR --network $(DOCKER_NETWORK) $(TAG) graph-store-post "$(ENEXA_META_DATA_ENDPOINT)"
 
-build:
+build: module.ttl
 	docker build -t $(TAG) .
 
 test: $(SHARED_DIR)/KGs
@@ -47,6 +47,6 @@ push-latest:
 	docker tag $(TAG) $(IMAGE):latest
 	docker push $(IMAGE):latest
 
-update-ttl-file:
-	echo "# Don't change this file! It is generated based on module.ttl.template." > module.ttl
-	sed 's/$$(VERSION)/$(VERSION)/g' module.ttl.template | sed 's=$$(TAG)=$(TAG)=g' >> module.ttl
+module.ttl: module.ttl.template Makefile
+	echo "# Don't change this file! It is generated based on module.ttl.template." >$@
+	sed 's/$$(VERSION)/$(VERSION)/g' $< | sed 's=$$(TAG)=$(TAG)=g' >>$@
