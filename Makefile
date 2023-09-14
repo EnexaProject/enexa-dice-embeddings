@@ -1,5 +1,5 @@
 IMAGE=hub.cs.upb.de/enexa/images/enexa-dice-embeddings
-VERSION=1.0.0
+VERSION=1.0.1
 TAG=$(IMAGE):$(VERSION)
 
 
