@@ -15,5 +15,7 @@ make test
 - ~Dockerfile~ :: A Dockerfile for the Docker image of this module.
 - ~module~ :: A main module script to translate the input and output parameters between ENEXA and the application.
 
+The documentation is available [[https://enexa.eu/documentation][here]]. You can find the module documentation [[https://enexa.eu/documentation/modules_overview.html#dice-embeddings-module][here]].
+
 ** Links
 - [[https://github.com/dice-group/dice-embeddings][DICE Embeddings]]
